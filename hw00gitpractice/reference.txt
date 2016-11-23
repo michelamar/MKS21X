@@ -1,0 +1,7 @@
+clone - you do this command when you are on a new device or if you're downloading a new repo.  It takes the repo on github and creates a copy on whatever device you are using.
+pull - takes the new version of a repo from github and updates the repo on your device
+add - tells github to keep track of the file and it's changes
+commit - saves changes on your local device
+push - uploads the local repo to github with all changes that have been committed
+status - tells you what files have been changed since the last commit and which files are not being tracked
+
