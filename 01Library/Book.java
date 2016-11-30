@@ -33,7 +33,7 @@ public class Book{
     }
 
     public String toString(){
-	return("Author: " +getAuthor() + "Title: " +getTitle()+ "ISBN: " +getISBN());
+	return(getTitle() + ", " +getAuthor()+ ", " +getISBN());
     }
 
     public static void main(String[]args){
