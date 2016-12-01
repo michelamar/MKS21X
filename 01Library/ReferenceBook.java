@@ -2,10 +2,7 @@ class ReferenceBook extends LibraryBook{
     private String collection;
 
     public ReferenceBook(String a, String t, String i, String call, String coll){
-	setAuthor(a);
-	setTitle(t);
-	setISBN(i);
-	setCallNumber(call);
+	super(a, t, i, call);
         collection = coll;
     }
 
@@ -21,6 +18,14 @@ class ReferenceBook extends LibraryBook{
     }  
     public void returned(){
 	System.out.println("reference book could not have been checked out -- return impossible");
+    }
+
+    public String circulationStatus(){
+	return "non-circulating reference book";
+    }
+
+    public String toString(){
+	return super.toString() + ", " + getCollection();
     }
 
 }
