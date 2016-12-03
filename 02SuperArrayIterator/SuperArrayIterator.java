@@ -8,11 +8,16 @@ public class SuperArrayIterator impliments Iterator<String>{
     }
 
     public boolean hasnext(){
-
+	return (element < name.size());
     }
 
     public String next(){
-
+	if (name.hasNext()){
+	    return (name.get(element+1));
+	}
+	else{
+	    throw new NoSuchElementException();
+	}
     }
 
     public void remove(){
