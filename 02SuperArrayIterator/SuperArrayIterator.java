@@ -7,7 +7,7 @@ public class SuperArrayIterator impliments Iterator<String>{
 	name = n;
     }
 
-    public boolean hasnext(){
+    public boolean hasNext(){
 
     }
 
