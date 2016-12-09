@@ -13,34 +13,69 @@ public class Barcode implements Comparable<Barcode>{
 	_checkDigit = checkSum();
     }
 
-// postcondition: Creates a copy of a bar code.//
-//    public Barcode clone(){}
-
-
 // postcondition: computes and returns the check sum for _zip
-    private int checkSum(){
+    private static int checkSum(String zip){
     	int sum = 0;
-	for (int pos = 0; pos < _zip.length(); pos++){
-	    sum += (int)_zip.charAt(pos);
+	for (int pos = 0; pos < zip.length(); pos++){
+	    sum += (int)zip.charAt(pos);
 	}
 	return sum%10;
     }
     
-    private String convert(){
+    private String convert(String zip){
 	String converted = "";	
-	for (int pos = 0; pos < _zip.length(); pos++){
-	    if ((int)_zip.length(pos) == 0){
+	for (int pos = 0; pos < zip.length(); pos++){
+	    if ((int)zip.length(pos) == 0){
 		converted += "||:::";
 	    }
+	    if ((int)zip.length(pos) == 1){
+		converted += ":::||";
+	    }
+	    if ((int)zip.length(pos) == 2){
+		converted += "::|:|";
+	    }
+	    if ((int)zip.length(pos) == 3){
+		converted += "::||:";
+	    }
+	    if ((int)zip.length(pos) == 4){
+		converted += ":|::|";
+	    }
+	    if ((int)zip.length(pos) == 5){
+		converted += ":|:|:";
+	    }
+	    if ((int)zip.length(pos) == 6){
+		converted += ":||::";
+	    }
+	    if ((int)zip.length(pos) == 7){
+		converted += "|:::|";
+	    }
+	    if ((int)zip.length(pos) == 8){
+		converted += "|::|:";
+	    }
+	    if ((int)zip.length(pos) == 9){
+		converted += "|:|::";
+	    }
+	}
+	return converted;
     }
+
+    public static String toCode(String zip){
+        return "|" + convert(zip) + checkSum(zip) + "|";
+    }
+
+    public static String toZip(String code){
+		
+  
 //postcondition: format zip + check digit + Barcode 
 //ex. "084518  |||:::|::|::|::|:|:|::::|||::|:|"      
-//    public String toString(){}
+    public String toString(){
+	return toCode(_zip);
+    }
 
 
 // postcondition: compares the zip + checkdigit, in numerical order. 
     public int compareTo(Barcode other){
-    	return 2;
+    	return _zip.compareTo(other._zip);
     }
     
 }
