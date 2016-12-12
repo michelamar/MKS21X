@@ -10,7 +10,7 @@ public class Barcode implements Comparable<Barcode>{
 //               _zip and _checkDigit are initialized.
     public Barcode(String zip) {
 	_zip = zip;
-	_checkDigit = checkSum();
+	_checkDigit = checkSum(zip);
     }
 
 // postcondition: computes and returns the check sum for _zip
@@ -22,45 +22,45 @@ public class Barcode implements Comparable<Barcode>{
 	return sum%10;
     }
     
-    private String convert1(String zip){
+    private static String convert1(String zip){
 	String converted = "";	
 	for (int pos = 0; pos < zip.length(); pos++){
-	    if ((int)zip.length(pos) == 0){
+	    if ((int)zip.charAt(pos) == '0'){
 		converted += "||:::";
 	    }
-	    if ((int)zip.length(pos) == 1){
+	    if ((int)zip.charAt(pos) == '1'){
 		converted += ":::||";
 	    }
-	    if ((int)zip.length(pos) == 2){
+	    if ((int)zip.charAt(pos) == '2'){
 		converted += "::|:|";
 	    }
-	    if ((int)zip.length(pos) == 3){
+	    if ((int)zip.charAt(pos) == '3'){
 		converted += "::||:";
 	    }
-	    if ((int)zip.length(pos) == 4){
+	    if ((int)zip.charAt(pos) == '4'){
 		converted += ":|::|";
 	    }
-	    if ((int)zip.length(pos) == 5){
+	    if ((int)zip.charAt(pos) == '5'){
 		converted += ":|:|:";
 	    }
-	    if ((int)zip.length(pos) == 6){
+	    if ((int)zip.charAt(pos) == '6'){
 		converted += ":||::";
 	    }
-	    if ((int)zip.length(pos) == 7){
+	    if ((int)zip.charAt(pos) == '7'){
 		converted += "|:::|";
 	    }
-	    if ((int)zip.length(pos) == 8){
+	    if ((int)zip.charAt(pos) == '8'){
 		converted += "|::|:";
 	    }
-	    if ((int)zip.length(pos) == 9){
+	    if ((int)zip.charAt(pos) == '9'){
 		converted += "|:|::";
 	    }
 	}
 	return converted;
     }
 
-    private String convert2(String code){
-	String value = ""
+    private static String convert2(String code){
+	String value = "";
 	for (int pos = 1; pos < 26; pos+=5){
 	    if (code.equals("||:::")){
 		value += "0";
@@ -100,11 +100,11 @@ public class Barcode implements Comparable<Barcode>{
     }    
 
     public static String toCode(String zip){
-        return "|" + convert1(zip) + checkSum(zip) + "|";
+        return "|" + convert1(zip) + convert1(""+checkSum(zip)) + "|";
     }
 
     public static String toZip(String code){
-	String zip = ""
+	String zip = "";
 	if (code.length() != 32){
 	    throw new IllegalArgumentException("length of the barcode is not 32");
 	}
@@ -116,7 +116,7 @@ public class Barcode implements Comparable<Barcode>{
 		throw new IllegalArgumentException("non-barcode characters are used");
 	    }
 	}
-	if (convert2(code).charAt(5) != checkSum(convertTo(code).substring(0, 5))){
+	if (convert2(code).charAt(5) != checkSum(convert2(code).substring(0, 5))){
 	    throw new IllegalArgumentException("invalid checkSum");
 	}
 	zip= convert2(code);
