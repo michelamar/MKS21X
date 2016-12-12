@@ -22,7 +22,7 @@ public class Barcode implements Comparable<Barcode>{
 	return sum%10;
     }
     
-    private String convert(String zip){
+    private String convert1(String zip){
 	String converted = "";	
 	for (int pos = 0; pos < zip.length(); pos++){
 	    if ((int)zip.length(pos) == 0){
@@ -59,11 +59,60 @@ public class Barcode implements Comparable<Barcode>{
 	return converted;
     }
 
+    private String convert2(String code){
+	String value = ""
+	for (int pos = 0; pos < zip.length(); pos++){
+	    if (code.equals("||:::")){
+		value += "0";
+	    }
+	    if (code.equals(":::||")){
+		value += "1";
+	    }
+      	    if (code.equals("::|:|")){
+		value += "2";
+	    }
+       	    if (code.equals("::||:")){
+		value += "3";
+	    }
+	    if (code.equals(":|::|")){
+		value += "4";
+	    }
+	    if (code.equals(":|:|:")){
+		value += "5";
+	    }
+	    if (code.equals(":||::")){
+		value += "6";
+	    }
+       	    if (code.equals("|:::|")){
+		value += "7";
+	    }
+       	    if (code.equals("|::|:")){
+		value += "8";
+	    }
+	    if (code.equals("|:|::")){
+		value += "9";
+	    }
+	}
+	return converted;
+    }    
+
     public static String toCode(String zip){
-        return "|" + convert(zip) + checkSum(zip) + "|";
+        return "|" + convert1(zip) + checkSum(zip) + "|";
     }
 
     public static String toZip(String code){
+	if (code.length() != 32){
+	    throw new IllegalArgumentException("length of the barcode is not 32");
+	}
+        if (code.charAt(0) != '|' || code.charAt(31) != '|'){
+	    throw new IllegalArgumentException("the left and rigthmost charcters are not '|'");
+	}
+	for (int pos = 0; pos < code.length(); pos++){
+	    if (code.charAt(pos) != '|' || code.charAt(pos) != ':'){
+		throw new IllegalArgumentException("non-barcode characters are used");
+	    }
+	}
+	
 		
   
 //postcondition: format zip + check digit + Barcode 
