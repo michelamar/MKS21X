@@ -61,39 +61,42 @@ public class Barcode implements Comparable<Barcode>{
 
     private String convert2(String code){
 	String value = ""
-	for (int pos = 0; pos < zip.length(); pos++){
+	for (int pos = 1; pos < 26; pos+=5){
 	    if (code.equals("||:::")){
 		value += "0";
 	    }
-	    if (code.equals(":::||")){
+	    else if (code.equals(":::||")){
 		value += "1";
 	    }
-      	    if (code.equals("::|:|")){
+      	    else if (code.equals("::|:|")){
 		value += "2";
 	    }
-       	    if (code.equals("::||:")){
+       	    else if (code.equals("::||:")){
 		value += "3";
 	    }
-	    if (code.equals(":|::|")){
+	    else if (code.equals(":|::|")){
 		value += "4";
 	    }
-	    if (code.equals(":|:|:")){
+	    else if (code.equals(":|:|:")){
 		value += "5";
 	    }
-	    if (code.equals(":||::")){
+	    else if (code.equals(":||::")){
 		value += "6";
 	    }
-       	    if (code.equals("|:::|")){
+       	    else if (code.equals("|:::|")){
 		value += "7";
 	    }
-       	    if (code.equals("|::|:")){
+       	    else if (code.equals("|::|:")){
 		value += "8";
 	    }
-	    if (code.equals("|:|::")){
+	    else if (code.equals("|:|::")){
 		value += "9";
 	    }
+	    else {
+		throw new IllegalArgumentException("encoded ints are invalid");
+	    }
 	}
-	return converted;
+	return value;
     }    
 
     public static String toCode(String zip){
@@ -101,6 +104,7 @@ public class Barcode implements Comparable<Barcode>{
     }
 
     public static String toZip(String code){
+	String zip = ""
 	if (code.length() != 32){
 	    throw new IllegalArgumentException("length of the barcode is not 32");
 	}
@@ -112,6 +116,14 @@ public class Barcode implements Comparable<Barcode>{
 		throw new IllegalArgumentException("non-barcode characters are used");
 	    }
 	}
+	if (convert2(code).charAt(5) != checkSum(convertTo(code).substring(0, 5))){
+	    throw new IllegalArgumentException("invalid checkSum");
+	}
+	zip= convert2(code);
+	return zip;
+    }
+	    
+	     
 	
 		
   
