@@ -13,7 +13,7 @@ public class Barcode implements Comparable<Barcode>{
 	_checkDigit = checkSum();
     }
 
-// postcondition: Creates a copy of a bar code.
+// postcondition: Creates a copy of a bar code.//
 //    public Barcode clone(){}
 
 
@@ -25,7 +25,14 @@ public class Barcode implements Comparable<Barcode>{
 	}
 	return sum%10;
     }
-
+    
+    private String convert(){
+	String converted = "";	
+	for (int pos = 0; pos < _zip.length(); pos++){
+	    if ((int)_zip.length(pos) == 0){
+		converted += "||:::";
+	    }
+    }
 //postcondition: format zip + check digit + Barcode 
 //ex. "084518  |||:::|::|::|::|:|:|::::|||::|:|"      
 //    public String toString(){}
