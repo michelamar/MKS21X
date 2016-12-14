@@ -11,7 +11,7 @@ public class Sorts{
   *Upon completion, the elements of the array will be in increasing order.
   *@param data  the elements to be sorted.
   */
-  public static void selectionSort(int[] data){
+    public static void selectionSort(int[] data){
       for (int start = 0; start <data.length; start++){
 	  int smallest = start;
 	  for (int current = start; current < data.length; current++){
@@ -25,7 +25,14 @@ public class Sorts{
 	      }
 	  }
       }		  
-  }
+    }
+  
+    public static void insertionSort(int[] data){
+	for (int pos = 1; pos < data.length; pos ++){
+	    for (int 
+	    int current = data[pos];
+	    while (current < data[pos-1]){
+		data[pos] = data[pos-1]
 
     public static void main(String[]args){
 	int[] a = {6,3,1,7,5,9,4,0,2};
