@@ -33,6 +33,23 @@ public class Sorts{
 	    int current = data[pos];
 	    while (current < data[pos-1]){
 		data[pos] = data[pos-1]
+   
+    public static void bubbleSort(int[] data){
+	boolean done = false
+	int swaps = 0;
+	for (int end = data.length; end < 0; end--){
+	    for (int pos = 0; pos <end; pos++){
+	        if (data[pos] > data[pos+1]){
+		    int temp = data[pos]; 
+		    data[pos] = data[pos+1];
+		    data[pos+1] = temp;
+		    swaps++;
+	        }
+	    }
+	    if (swaps == 0){
+		return;
+	    }
+	}
 
     public static void main(String[]args){
 	int[] a = {6,3,1,7,5,9,4,0,2};
