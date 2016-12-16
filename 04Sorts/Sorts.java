@@ -27,12 +27,22 @@ public class Sorts{
       }		  
     }
   
-    // public static void insertionSort(int[] data){
-    // 	for (int pos = 1; pos < data.length; pos ++){
-    // 	    for (int 
-    // 	    int current = data[pos];
-    // 	    while (current < data[pos-1]){
-    // 		data[pos] = data[pos-1]
+    public static void insertionSort(int[] data){
+	for (int pos = 1; pos < data.length; pos++){
+	    int currentVal = data[pos];
+	    int properPlace=pos;
+	    while (properPlace!=0 && currentVal < data[properPlace-1]){
+		properPlace--;
+	    }
+	    for (int move = pos; move >= properPlace && move !=0 ; move--){
+		data[move] = data[move-1];
+	    }
+	    data[properPlace] = currentVal;
+	}
+    }
+		
+
+		    
    
     public static void bubbleSort(int[] data){
 	int swaps = 0;
@@ -77,6 +87,18 @@ public class Sorts{
 	int[] h = {400,303,1500,1759,1618,13,11,1436,2168,1172,5280,2016,38387};
 	bubbleSort(h);
 	System.out.println(Arrays.toString(h));
+	int[] i = {6,3,1,7,5,9,4,0,2};
+	insertionSort(i);
+	System.out.println(Arrays.toString(i));
+	int[] j = {};
+	insertionSort(j);
+	System.out.println(Arrays.toString(j));
+	int[] k = {10};
+	insertionSort(k);
+	System.out.println(Arrays.toString(k));
+	int[] l = {400,303,1500,1759,1618,13,11,1436,2168,1172,5280,2016,38387};
+	insertionSort(l);
+	System.out.println(Arrays.toString(l));
     }
 
 }
